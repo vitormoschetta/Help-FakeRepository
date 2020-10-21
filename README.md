@@ -1,5 +1,5 @@
 # Help-FakeRepository
-
+```
 public class FakeRepository
 {
   private readonly List<Product> list;
@@ -78,8 +78,9 @@ public class FakeRepository
       }
   }
 }
+```
 
-
+```
 public class Product
 {
     public Product(Guid id, string name)
@@ -96,3 +97,4 @@ public class Product
     public Guid Id { get; set; }
     public string Name { get; set; }
 }
+```` 
