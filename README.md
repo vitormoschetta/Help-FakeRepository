@@ -2,80 +2,58 @@
 ```
 public class FakeRepository
 {
-  private readonly List<Product> list;
-  public FakeRepository()
+  private readonly List<Product> List;
+  public FakeProductRepository()
   {
-      list = new List<Product>() {
-          new Product(new Guid("C56A4180-65AA-42EC-A945-5FD21DEC0537"), "Product A"),
-          new Product(new Guid("C56A4180-65AA-42EC-A945-5FD21DEC0538"), "Product B"),
-          new Product(new Guid("C56A4180-65AA-42EC-A945-5FD21DEC0539"), "Product C"),
+      List = new List<Product>() {
+          new Product("Product A", 5.99m),
+          new Product("Product B", 10.00m),
+          new Product("Product C", 500.00m)
       };
   }
 
   public bool Exists(string name)
   {
-      foreach (var item in list)
-      {
-          if (name == item.Name)
-              return true;
-      }
+      var item = List.FirstOrDefault(x => x.Name == name);
+      if (item != null)
+          return true;
 
       return false;
   }
 
-  public void Create(Product product)
+  public void Create(Product model)
   {
-      list.Add(product);
+      List.Add(model);
   }
 
 
   public void Delete(Guid id)
   {
-      foreach (var item in list)
-      {
-          if (id == item.Id)
-              list.Remove(item);
-      }
+      var item = List.FirstOrDefault(x => x.Id == id);
+      if (item != null)
+          List.Remove(item);
   }
 
-  public bool Exist(Guid id)
-  {
-      foreach (var item in list)
-      {
-          if (id == item.Id)
-              return true;
-      }
-
-      return false;
-  }
 
   public IEnumerable<Product> GetAll()
   {
-      return list;
+      return List;
   }
 
   public Product GetById(Guid id)
   {
-      foreach (var item in list)
-      {
-          if (id == item.Id)
-              return item;
-      }
-
-      return null;
+      return List.FirstOrDefault(x => x.Id == id);
   }
 
-  public void Update(Product product)
+  public void Update(Product model)
   {
-      foreach (var item in list)
+      var item = List.FirstOrDefault(x => x.Id == model.Id);
+      if (item != null)
       {
-          if (product.Id == item.Id)
-          {
-              list.Remove(item);
-              list.Add(product);
-          }
-
+          List.Remove(item);
+          List.Add(model);
       }
+
   }
 }
 ```
