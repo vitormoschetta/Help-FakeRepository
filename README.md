@@ -65,6 +65,12 @@ public class FakeRepository
       }
 
   }
+  
+  public List<Product> Search(string param)
+  {
+      var lista = List.Where(x => x.Name.Contains(param) || x.Price.ToString().Contains(param)).ToList();
+      return lista;
+  }
 }
 ```
 
