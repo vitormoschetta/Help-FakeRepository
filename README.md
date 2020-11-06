@@ -20,6 +20,16 @@ public class FakeRepository
 
       return false;
   }
+  
+  public bool ExistsUpdate(string name, Guid id)
+  {
+      var item = List.FirstOrDefault(x => x.Name == name && x.Id != id);
+      if (item != null)
+          return true;
+
+      return false;
+
+  }
 
   public void Create(Product model)
   {
