@@ -1,4 +1,4 @@
-# Help-FakeRepository
+# CSharp
 ```
 public class FakeRepository
 {
@@ -92,3 +92,74 @@ public class Product
     public string Name { get; set; }
 }
 ```` 
+
+
+
+
+
+# TypeScript
+
+```
+export class ProductFakeService {
+  list: Product[]
+
+  constructor() {
+    this.list = [
+      { id: '1', name: 'product 01', price: '1.99' },
+      { id: '2', name: 'product 02', price: '9.99' },
+      { id: '3', name: 'product 03', price: '2.55' },
+      { id: '4', name: 'product 04', price: '5.99' },
+    ];
+  }
+
+  Create(product: Product): void {   
+    product.id = (this.list.length + 1).toString()
+    this.list.push(product)   
+  }
+
+  Update(product: Product): void { 
+    let item = this.list.find(x => x.id == product.id)
+    item.name = product.name
+    item.price = product.price         
+  }
+
+  Delete(id: string): void { 
+    for(var i=0; i < this.list.length; i++) {
+      if (this.list[i].id == id) 
+        this.list.splice(i,1)               
+    }      
+  }
+
+  GetAll(): Product[] {
+    return this.OderByName(this.list)
+  }
+
+  GetById(id: string): Product {
+    return this.list.find(x => x.id == id)
+  }  
+
+  Exist(name: string): boolean {
+    var item = this.list.find(x => x.name == name)
+    if (item == undefined)
+      return false
+    return true
+  }
+
+  existUpdate(name: string, id: string): boolean {
+    var item = this.list.find(x => x.name == name && x.id != id)
+    if (item == undefined)
+      return false
+    return true
+  }
+
+  OderByName(list: Product[]) {
+    return list.sort(function (a, b) {
+      if (a.name < b.name) { return -1; }
+      if (a.name > b.name) { return 1; }
+      return 0;
+    })
+  }
+  
+ 
+```
+
