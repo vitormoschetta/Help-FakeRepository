@@ -159,7 +159,7 @@ export class ProductFakeService {
       return 0;
     })
   }
-  
+}
  
 ```
 
